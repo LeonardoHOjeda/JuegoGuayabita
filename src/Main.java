@@ -23,12 +23,24 @@ public class Main {
         for (int j=0; j<numPlayers; j++){
             System.out.println(namePlayer[j]);
         }
+        int randomNumbers[] = new int[numPlayers];
         for (int k=0; k<numPlayers; k++){
             System.out.print("\nLanza el dado "+namePlayer[k]+ "(Presiona Enter)");
             System.in.read();
-            System.out.println("El resultado es: "+((int)(Math.random()*5)+1));
+            randomNumbers[k] = (int)(Math.random()*5+1);
+            System.out.println("El resultado es: "+ randomNumbers[k]);
         }
-        System.out.println();
+        int maxNumber = randomNumbers[0];
+        String persona = namePlayer[0];
+        for(int a=0;a<numPlayers;a++){
+            if (maxNumber<randomNumbers[a]){
+                System.out.println("Unos valores se repiten");
+                maxNumber = randomNumbers[a];
+                persona = namePlayer[a];
+            }
+        }
+        System.out.println("Numero maximo "+maxNumber+" persona: "+namePlayer.toString());
+
 
     }
 
