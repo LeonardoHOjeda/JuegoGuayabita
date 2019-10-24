@@ -2,16 +2,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-
+    static Scanner sc = new Scanner(System.in);
+    static int numPlayers;
 
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        int numPlayers;
-        player pl1;
-
-
-
-
         System.out.println("Cuantos jugadores van a jugar?");
         numPlayers = sc.nextInt();
         String namePlayer[] = new String[numPlayers];
