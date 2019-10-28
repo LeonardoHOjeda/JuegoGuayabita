@@ -16,6 +16,7 @@ public class Main {
     public static void startGame() throws IOException{
         System.out.println("Cuantos jugadores van a jugar?");
         numPlayers = sc.nextInt();
+
         if (numPlayers <= 1){
             System.out.println("EL JUEGO ES PARA DOS O MAS PERSONAS");
             startGame();
@@ -73,68 +74,71 @@ public class Main {
         int pivote = 0;
 
         for (int k=0; k<numPlayers; k++){// Lanzamiento de dado
-            System.out.print("\nLanza el dado "+arrayPlayers[k].getNombre()+ "(Presiona Enter) **APUESTA $"+apuesta+"** **DINERO $"+arrayPlayers[k].getDinero()+"**");
-            System.in.read();
-            dice = (int)(Math.random()*(5+1)+1);
+            if(apuesta > 0){
+                System.out.print("\nLanza el dado "+arrayPlayers[k].getNombre()+ "(Presiona Enter) **APUESTA $"+apuesta+"** **DINERO $"+arrayPlayers[k].getDinero()+"**");
+                System.in.read();
+                dice = (int)(Math.random()*(5+1)+1);
 
-            System.out.println("****Primer lanzamiento: "+dice+"****");
-            System.out.println("Que quieres hacer?");
-            System.out.println("1) Ir por la apuesta!");
-            System.out.println("2) Ir por TODOOO!");
-            respuestaDice = sc.nextInt();
-            switch (respuestaDice){
-                case 1:
-                    if(arrayPlayers[k].getDinero() >= 1){
-                        System.out.println("Elegiste apuesta!");
-                        System.out.print("Vuelve a lanzar el dado!");
-                        System.in.read();
-                        randomNumbers[k] = (int)(Math.random()*(5+1)+1);
-                        System.out.println("Segundo lanzamiento: "+ randomNumbers[k]+"\n");
-                        if(randomNumbers[k] > dice){
-                            System.out.println("Ganaste! Recoge una moneda");
-                            arrayPlayers[k].setDinero(arrayPlayers[k].getDinero()+1);
-                            apuesta--;
-                            System.out.println("El dinero de "+arrayPlayers[k].getNombre()+" es de: "+arrayPlayers[k].getDinero());
-                        } else {
-                            System.out.println("Perdiste, entrega una moneda");
-                            arrayPlayers[k].setDinero(arrayPlayers[k].getDinero()-1);
-                            apuesta++;
-                            System.out.println("El dinero de "+arrayPlayers[k].getNombre()+" es de: "+arrayPlayers[k].getDinero());
+                System.out.println("****Primer lanzamiento: "+dice+"****");
+                System.out.println("Que quieres hacer?");
+                System.out.println("1) Ir por la apuesta!");
+                System.out.println("2) Ir por TODOOO!");
+                respuestaDice = sc.nextInt();
+                switch (respuestaDice){
+                    case 1:
+                        if(arrayPlayers[k].getDinero() >= 1){
+                            System.out.println("Elegiste apuesta!");
+                            System.out.print("Vuelve a lanzar el dado!");
+                            System.in.read();
+                            randomNumbers[k] = (int)(Math.random()*(5+1)+1);
+                            System.out.println("Segundo lanzamiento: "+ randomNumbers[k]+"\n");
+                            if(randomNumbers[k] > dice){
+                                System.out.println("Ganaste! Recoge una moneda");
+                                arrayPlayers[k].setDinero(arrayPlayers[k].getDinero()+1);
+                                apuesta--;
+                                System.out.println("El dinero de "+arrayPlayers[k].getNombre()+" es de: "+arrayPlayers[k].getDinero());
+                            } else {
+                                System.out.println("Perdiste, entrega una moneda");
+                                arrayPlayers[k].setDinero(arrayPlayers[k].getDinero()-1);
+                                apuesta++;
+                                System.out.println("El dinero de "+arrayPlayers[k].getNombre()+" es de: "+arrayPlayers[k].getDinero());
+                            }
+                        } else{
+                            System.out.println("Lo sentimos, no tienes fondos suficientes para realizar esta accion");
+                            break;
                         }
-                    } else{
-                        System.out.println("Lo sentimos, no tienes fondos suficientes para realizar esta accion");
                         break;
-                    }
-                    break;
-                case 2:
-                    if (arrayPlayers[k].getDinero() >= apuesta){
-                        System.out.println("*********ELEGISTE TODO!!********");
-                        System.out.print("Vuelve a lanzar el dado!");
-                        System.in.read();
-                        randomNumbers[k] = (int)(Math.random()*(5+1)+1);
-                        System.out.println("Segundo lanzamiento: "+ randomNumbers[k]+"\n");
-                        if(randomNumbers[k] > dice){
-                            System.out.println("Ganaste! Recoge todas las monedas!");
-                            arrayPlayers[k].setDinero(arrayPlayers[k].getDinero() + apuesta);
-                            apuesta -= apuesta;
-                            System.out.println("El dinero de "+arrayPlayers[k].getNombre()+" es de: "+arrayPlayers[k].getDinero());
+                    case 2:
+                        if (arrayPlayers[k].getDinero() >= apuesta){
+                            System.out.println("*********ELEGISTE TODO!!********");
+                            System.out.print("Vuelve a lanzar el dado!");
+                            System.in.read();
+                            randomNumbers[k] = (int)(Math.random()*(5+1)+1);
+                            System.out.println("Segundo lanzamiento: "+ randomNumbers[k]+"\n");
+                            if(randomNumbers[k] > dice){
+                                System.out.println("Ganaste! Recoge todas las monedas!");
+                                arrayPlayers[k].setDinero(arrayPlayers[k].getDinero() + apuesta);
+                                apuesta -= apuesta;
+                                System.out.println("El dinero de "+arrayPlayers[k].getNombre()+" es de: "+arrayPlayers[k].getDinero());
+                            } else {
+                                System.out.println("Perdiste, entrega "+apuesta+" monedas");
+                                pivote = arrayPlayers[k].getDinero();
+                                arrayPlayers[k].setDinero(arrayPlayers[k].getDinero()-apuesta);
+                                apuesta += apuesta;
+                                System.out.println("El dinero de "+arrayPlayers[k].getNombre()+" es de: "+arrayPlayers[k].getDinero());
+                            }
                         } else {
-                            System.out.println("Perdiste, entrega "+apuesta+" monedas");
-                            pivote = arrayPlayers[k].getDinero();
-                            arrayPlayers[k].setDinero(arrayPlayers[k].getDinero()-apuesta);
-                            apuesta += apuesta;
-                            System.out.println("El dinero de "+arrayPlayers[k].getNombre()+" es de: "+arrayPlayers[k].getDinero());
+                            System.out.println("Lo sentimos, no tienes fondos suficientes para realizar esta accion");
+                            break;
                         }
-                    } else {
-                        System.out.println("Lo sentimos, no tienes fondos suficientes para realizar esta accion");
                         break;
-                    }
-                    break;
-                default:
-                    System.out.println("Esa opcion no existe");
-            }
-            System.out.println("Dinero actual de la apuesta: $"+apuesta);
+                    default:
+                        System.out.println("Esa opcion no existe");
+                }
+                System.out.println("Dinero actual de la apuesta: $"+apuesta);
 
+            } else
+                break;
         }
     }
 
