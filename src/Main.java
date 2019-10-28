@@ -16,6 +16,10 @@ public class Main {
     public static void startGame() throws IOException{
         System.out.println("Cuantos jugadores van a jugar?");
         numPlayers = sc.nextInt();
+        if (numPlayers <= 1){
+            System.out.println("EL JUEGO ES PARA DOS O MAS PERSONAS");
+            startGame();
+        }
 
         String namePlayer[] = new String[numPlayers]; // Numero de personas
 
@@ -49,29 +53,9 @@ public class Main {
         }while (apuesta > 0);
         System.out.println("El juego ha terminado!");
 
-        int maxNumber = 0;//randomNumbers[0];
+        /*int maxNumber = 0;//randomNumbers[0];
         String persona = namePlayer[0];
-        int valormaximo[] = new int [numPlayers]; //Se introducen los valores maximos
-        /*for(int a=0; a<randomNumbers.length; a++){
-            if(maxNumber<randomNumbers[a]){
-                maxNumber = randomNumbers[a];
-                persona = namePlayer[a];
-            }
-                if(maxNumber==randomNumbers[a]){
-                    System.out.println("MaxNumber = "+maxNumber+" RNb["+a+"] = "+randomNumbers[a]);
-                    if(maxNumber==0){
-                        break;
-                    } else {
-                        valormaximo[a] = maxNumber;
-                    }
-                }
-        }
-        for(int c=0; c<valormaximo.length;c++){
-            System.out.println("Longitud: "+valormaximo.length+": "+valormaximo[c]);
-        }*/
-
-
-        //System.out.println("\nEmpieza a tirar el jugador: "+persona+" Numero maximo "+maxNumber+" persona: "+persona);
+        int valormaximo[] = new int [numPlayers]; //Se introducen los valores maximos*/
     }
 
     public static void apuestaGeneral(player arrayPlayer[]){
@@ -93,7 +77,7 @@ public class Main {
             System.in.read();
             dice = (int)(Math.random()*(5+1)+1);
 
-            System.out.println("Primer lanzamiento: "+dice);
+            System.out.println("****Primer lanzamiento: "+dice+"****");
             System.out.println("Que quieres hacer?");
             System.out.println("1) Ir por la apuesta!");
             System.out.println("2) Ir por TODOOO!");
