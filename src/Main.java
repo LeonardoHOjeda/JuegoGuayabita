@@ -93,3 +93,5 @@ public class Main {
         System.out.println("\nEmpieza a tirar el jugador: "+persona+" Numero maximo "+maxNumber+" persona: "+persona);
     }
 }
+
+// Comentario de prueba 2 en main... por SanxgoStarck
